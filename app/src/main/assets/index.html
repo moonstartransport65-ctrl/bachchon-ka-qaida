@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light} html,body{margin:0} body{font-size:14px} [hidden]{display:none!important}</style>
+</head>
+<body>
+<title>بچوں کا قاعدہ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;600&family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap">
+<style>
+/* Layout: one notebook-style writing board with a big dotted letter, tools under it, letter strip at the bottom.
+   Palette: sky paper, ink blue text, notebook line colors, one sunny action color, four crayons. */
+:root{
+  --bg:#EAF2FF; --surface:#FFFFFF; --ink:#16264A; --muted:#566A94; --edge:#CBD8F2;
+  --line:#8FB0EA; --mid:#F0A0A8; --guide-dot:#6B82BA; --guide-fill:#EEF3FD;
+  --accent:#FFC53D; --accent-ink:#2B2100; --ok:#1F8F4E; --ok-bg:#DDF4E6;
+  --c0:#2447D6; --c1:#D6333D; --c2:#1E9A52; --c3:#8A3FC7;
+  --p0:#E5484D; --p1:#F5871F; --p2:#FFD33D; --p3:#2FA85E; --p4:#36A9E1; --p5:#8A3FC7; --p6:#FF7EB6; --p7:#8B5A2B;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1630; --surface:#172245; --ink:#EAF0FF; --muted:#9FB0D6; --edge:#2D3F72;
+    --line:#3E5496; --mid:#8F4D5C; --guide-dot:#93A8DF; --guide-fill:#212F5C;
+    --accent:#FFC53D; --accent-ink:#2B2100; --ok:#4FD08A; --ok-bg:#16402C;
+    --c0:#7C9BFF; --c1:#FF7A82; --c2:#4FD08A; --c3:#C79BFF;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1630; --surface:#172245; --ink:#EAF0FF; --muted:#9FB0D6; --edge:#2D3F72;
+  --line:#3E5496; --mid:#8F4D5C; --guide-dot:#93A8DF; --guide-fill:#212F5C;
+  --accent:#FFC53D; --accent-ink:#2B2100; --ok:#4FD08A; --ok-bg:#16402C;
+  --c0:#7C9BFF; --c1:#FF7A82; --c2:#4FD08A; --c3:#C79BFF;
+  color-scheme:dark;
+}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Andika','Noto Nastaliq Urdu','Noto Naskh Arabic',system-ui,sans-serif;
+  font-size:17px; line-height:1.9;
+  padding-top:14px; padding-bottom:calc(96px + env(safe-area-inset-bottom, 0px));
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.app{max-width:560px; margin-inline:auto; display:grid; gap:12px}
+h1{margin:0; font-size:28px; font-weight:600; line-height:1.9; text-wrap:balance}
+.sub{margin:0; color:var(--muted); font-size:15px}
+.top{display:grid; gap:0}
+.i{width:22px; height:22px; flex:none; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.i.fill{fill:currentColor; stroke:none}
+
+button{font:inherit; color:inherit}
+.btn{
+  min-height:56px; padding:0 18px; border-radius:16px; border:2px solid var(--edge);
+  background:var(--surface); color:var(--ink); font-size:18px; line-height:1.4;
+  display:inline-flex; align-items:center; justify-content:center; gap:10px; cursor:pointer;
+}
+.btn.primary{background:var(--accent); color:var(--accent-ink); border-color:transparent; font-weight:700}
+.btn.small{min-height:48px; padding:0 14px; font-size:16px}
+.btn:disabled{opacity:.45; cursor:default}
+.btn:focus-visible,.tab:focus-visible,.chip:focus-visible,.crayon:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+
+.tabs{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; direction:ltr}
+.tab{
+  min-height:62px; border-radius:14px; border:2px solid var(--edge); background:var(--surface);
+  font-size:19px; font-weight:700; cursor:pointer; line-height:1.5;
+  display:inline-flex; flex-direction:column; align-items:center; justify-content:center; gap:0; padding:2px 6px;
+}
+.tab small{font-size:14px; font-weight:400; letter-spacing:0}
+.case{display:flex; gap:8px; justify-content:center; direction:ltr}
+.case button{min-width:72px; min-height:46px; border-radius:12px; border:2px solid var(--edge); background:var(--surface); font-size:22px; font-weight:700; cursor:pointer}
+.case button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:transparent}
+.case button:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+.dock{
+  position:fixed; left:0; right:0; bottom:0; z-index:5; background:var(--surface); border-top:2px solid var(--edge);
+  padding:8px max(16px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.dock .tabs{max-width:560px; margin-inline:auto}
+.snd{border:2px solid var(--edge); border-radius:16px; background:var(--surface); padding:2px 14px 12px}
+.snd summary{cursor:pointer; min-height:52px; display:flex; align-items:center; font-size:17px}
+.snd p{margin:6px 0; font-size:15px; color:var(--muted)}
+.head{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+.head h1{flex:1 1 200px; min-width:0}
+.langsel{font:inherit; font-size:16px; min-height:46px; padding:0 10px; border-radius:12px; border:2px solid var(--edge); background:var(--surface); color:var(--ink); max-width:100%; cursor:pointer}
+.langsel:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+[lang="en"]{font-family:'Andika',system-ui,sans-serif; line-height:1.5}
+[lang="hi"]{font-family:'Andika','Noto Sans Devanagari','Nirmala UI',system-ui,sans-serif; line-height:1.6}
+[lang="ar"],[lang="fa"],[lang="ps"],[lang="sd"]{font-family:'Andika','Noto Naskh Arabic','Noto Nastaliq Urdu',system-ui,sans-serif; line-height:1.7}
+main:not([lang="ur"]) h1{line-height:1.4}
+main:not([lang="ur"]) .urname{line-height:1.5}
+.snd select{font:inherit; font-size:15px; max-width:100%; min-height:44px; background:var(--surface); color:var(--ink); border:2px solid var(--edge); border-radius:10px; margin-block:6px}
+.snd input[type=file]{max-width:100%; font:inherit; font-size:15px; margin-block:6px}
+.tab[aria-selected="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+
+.board{background:var(--surface); border:2px solid var(--edge); border-radius:22px; padding:12px; display:grid; gap:10px}
+.meta{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.say{display:flex; align-items:center; gap:10px; min-width:0}
+.urname{font-size:26px; font-weight:600; line-height:1.9}
+.count{color:var(--muted); font-size:15px; font-variant-numeric:tabular-nums; direction:ltr}
+
+.pad{position:relative; width:100%; aspect-ratio:1/1; border-radius:14px; overflow:hidden; background:var(--surface); border:2px solid var(--edge)}
+.pad canvas{position:absolute; inset:0; width:100%; height:100%; display:block}
+#ink{touch-action:none; cursor:crosshair}
+.star{
+  position:absolute; top:10px; inset-inline-start:10px; width:44px; height:44px; border-radius:50%;
+  background:var(--ok-bg); color:var(--ok); display:grid; place-items:center; pointer-events:none;
+}
+.star .i{width:26px; height:26px}
+
+.status{margin:0; min-height:2.2em; text-align:center; color:var(--muted); font-size:16px}
+.status.ok{color:var(--ok); font-weight:600}
+
+.tools{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+.crayons{display:flex; gap:10px}
+.crayon{width:44px; height:44px; border-radius:50%; border:3px solid var(--surface); box-shadow:0 0 0 2px var(--edge); cursor:pointer; padding:0}
+.crayon[aria-checked="true"]{box-shadow:0 0 0 4px var(--ink)}
+
+.nav{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.nav .btn{width:100%}
+.btn.ready{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+
+.strip{display:flex; gap:8px; overflow-x:auto; direction:ltr; padding:4px 2px 10px}
+.chip{
+  flex:0 0 auto; width:48px; height:48px; border-radius:12px; border:2px solid var(--edge);
+  background:var(--surface); font-size:20px; font-weight:700; cursor:pointer; position:relative; line-height:1;
+}
+.chip.done{background:var(--ok-bg); border-color:var(--ok)}
+.chip.on{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent)}
+.chip .mini{position:absolute; top:-6px; right:-6px; width:18px; height:18px; color:var(--ok)}
+
+.pad svg.pic{position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:manipulation}
+.pic .f{fill:var(--surface); stroke:var(--ink); stroke-width:3.5; stroke-linejoin:round; cursor:pointer}
+.pic .l{fill:none; stroke:var(--ink); stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; pointer-events:none}
+.pic .cap{font-family:'Noto Naskh Arabic','Droid Arabic Naskh',serif; font-weight:700; font-size:22px; fill:var(--ink); text-anchor:middle; pointer-events:none}
+.swatches{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:100%}
+.sw{
+  min-height:66px; padding:6px 2px; border-radius:14px; border:2px solid var(--edge); background:var(--surface); color:var(--ink);
+  cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  font-size:14px; line-height:1.35; direction:ltr;
+}
+.sw .dot{width:28px; height:28px; border-radius:50%; border:2px solid var(--ink); flex:none}
+.sw .ur{font-size:13px; color:var(--muted); line-height:1.5}
+.sw[aria-checked="true"]{border-color:var(--ink); box-shadow:0 0 0 3px var(--accent)}
+.sw.erase{grid-column:1 / -1; flex-direction:row; min-height:48px; gap:10px; direction:inherit; font-size:16px}
+.sw:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+.ask{
+  display:flex; align-items:center; gap:12px; width:100%; min-height:68px; padding:6px 14px; border-radius:16px;
+  border:2px solid var(--edge); background:var(--guide-fill); cursor:pointer; text-align:start;
+}
+.ask > div{min-width:0}
+.askdot{width:42px; height:42px; border-radius:50%; border:3px solid var(--ink); flex:none}
+.askEn{font-size:28px; font-weight:700; line-height:1.25; direction:ltr; text-align:start}
+.askUr{font-size:16px; line-height:1.7; color:var(--muted)}
+.ask:focus-visible{outline:3px solid var(--ink); outline-offset:2px}
+.pic .f.next{stroke:var(--accent); stroke-width:8; animation:glow .9s ease-in-out infinite alternate}
+@keyframes glow{from{stroke-width:4}to{stroke-width:9}}
+
+@media (prefers-reduced-motion: reduce){ .btn.ready{animation:none} .pic .f.next{animation:none} }
+.chip{font-family:'Noto Naskh Arabic','Droid Arabic Naskh',serif}
+.tab span[lang="ar"]{font-family:'Noto Naskh Arabic','Droid Arabic Naskh',serif; line-height:1.6}
+.askEn.formula{font-size:34px; font-weight:700; direction:ltr; font-family:'Noto Naskh Arabic','Droid Arabic Naskh',serif; line-height:1.5}
+.urname{font-family:'Noto Naskh Arabic','Andika','Noto Nastaliq Urdu',serif}
+.btn[hidden]{display:none!important}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M3 10v4h4l5 4V6L7 10H3z" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none"/></symbol>
+  <symbol id="i-eraser" viewBox="0 0 24 24"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12,2.5 14.9,8.6 21.5,9.4 16.6,14 17.9,20.6 12,17.3 6.1,20.6 7.4,14 2.5,9.4 9.1,8.6" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<main class="app" lang="ur" dir="rtl">
+  <header class="top">
+    <div class="head"><h1 data-i="title">بچوں کا قاعدہ</h1><select id="lang" class="langsel" aria-label="Language"></select></div>
+    <p class="sub" data-i="sub">انگلی سے نقطوں کے اوپر لکھیں</p>
+  </header>
+
+  <section class="board">
+    <div class="meta">
+      <div class="say">
+        <button class="btn small" id="speak" type="button"><svg class="i"><use href="#i-speaker"/></svg><span data-i="listen">سنیں</span></button>
+        <span class="urname" id="urname" lang="ar">الف</span>
+      </div>
+      <span class="count" id="count">1 / 28</span>
+    </div>
+
+    <button class="ask" id="ask" type="button" hidden aria-live="polite">
+      <span class="askdot" id="askdot"></span>
+      <div><div class="askEn" id="askEn" lang="ar"></div><div class="askUr" id="askUr"></div></div>
+    </button>
+
+    <div class="pad" id="pad">
+      <canvas id="guide"></canvas>
+      <canvas id="ink"></canvas>
+      <svg id="pic" class="pic" viewBox="0 0 200 200" hidden role="img" aria-label="رنگ بھرنے کی تصویر"></svg>
+      <span class="star" id="star" hidden><svg class="i fill"><use href="#i-star"/></svg></span>
+    </div>
+
+    <p class="status" id="status" aria-live="polite">انگلی سے نقطوں کے اوپر لکھیں</p>
+
+    <div class="tools">
+      <div class="crayons" id="wcrayons" role="radiogroup" aria-label="رنگ">
+        <button class="crayon" role="radio" aria-checked="true" aria-label="نیلا" data-c="0" style="background:var(--c0)"></button>
+        <button class="crayon" role="radio" aria-checked="false" aria-label="لال" data-c="1" style="background:var(--c1)"></button>
+        <button class="crayon" role="radio" aria-checked="false" aria-label="ہرا" data-c="2" style="background:var(--c2)"></button>
+        <button class="crayon" role="radio" aria-checked="false" aria-label="جامنی" data-c="3" style="background:var(--c3)"></button>
+      </div>
+      <div class="swatches" id="swatches" role="radiogroup" aria-label="رنگ چنیں" hidden>
+        <button class="sw" role="radio" aria-checked="false" aria-label="Red" data-p="0"><span class="dot" style="background:var(--p0)"></span><span class="arn" lang="ar"></span><span class="ur" data-c="0">لال</span></button>
+        <button class="sw" role="radio" aria-checked="false" aria-label="Orange" data-p="1"><span class="dot" style="background:var(--p1)"></span><span class="arn" lang="ar"></span><span class="ur" data-c="1">نارنجی</span></button>
+        <button class="sw" role="radio" aria-checked="false" aria-label="Yellow" data-p="2"><span class="dot" style="background:var(--p2)"></span><span class="arn" lang="ar"></span><span class="ur" data-c="2">پیلا</span></button>
+        <button class="sw" role="radio" aria-checked="false" aria-label="Green" data-p="3"><span class="dot" style="background:var(--p3)"></span><span class="arn" lang="ar"></span><span class="ur" data-c="3">ہرا</span></button>
+        <button class="sw" role="radio" aria-checked="false" aria-label="Blue" data-p="4"><span class="dot" style="background:var(--p4)"></span><span class="arn" lang="ar"></span><span class="ur" data-c="4">نیلا</span></button>
+        <button class="sw" role="radio" aria-checked="false" aria-label="Purple" data-p="5"><span class="dot" style="background:var(--p5)"></span><span class="arn" lang="ar"></span><span class="ur" data-c="5">جامنی</span></button>
+        <button class="sw" role="radio" aria-checked="false" aria-label="Pink" data-p="6"><span class="dot" style="background:var(--p6)"></span><span class="arn" lang="ar"></span><span class="ur" data-c="6">گلابی</span></button>
+        <button class="sw" role="radio" aria-checked="false" aria-label="Brown" data-p="7"><span class="dot" style="background:var(--p7)"></span><span class="arn" lang="ar"></span><span class="ur" data-c="7">بھورا</span></button>
+        <button class="sw erase" role="radio" aria-checked="false" aria-label="رنگ ہٹائیں" data-p="-1"><svg class="i"><use href="#i-eraser"/></svg><span data-i="erase">رنگ ہٹائیں</span></button>
+      </div>
+      <button class="btn" id="clear" type="button"><svg class="i"><use href="#i-eraser"/></svg><span data-i="clear">صاف کریں</span></button>
+    </div>
+  </section>
+
+  <nav class="nav" aria-label="حرف بدلیں">
+    <button class="btn" id="prev" type="button"><svg class="i"><use href="#i-right"/></svg><span data-i="prev">پچھلا</span></button>
+    <button class="btn primary" id="next" type="button"><span data-i="next">اگلا</span><svg class="i"><use href="#i-left"/></svg></button>
+  </nav>
+
+  <div class="strip" id="strip" aria-label="سارے حرف"></div>
+
+  <details class="snd">
+    <summary data-i="mp3sum">آواز (MP3) شامل کریں</summary>
+    <p data-i="mp3help"></p>
+    <input type="file" id="mp3" accept="audio/*" multiple>
+    <p id="clipinfo">ابھی کوئی MP3 شامل نہیں</p>
+    <button class="btn small" id="mp3clear" type="button" data-i="clearclips">سب آوازیں ہٹائیں</button>
+    <p data-i="ifnosound">اگر آواز نہ آئے تو یہ بٹن دبا کر دیکھیں:</p>
+    <button class="btn small" id="vtest" type="button" data-i="vtest">آواز کی جانچ</button>
+    <p id="vinfo"></p>
+    <button class="btn small" id="vinstall" type="button" data-i="vinstall">عربی آواز انسٹال کریں</button>
+  </details>
+</main>
+
+<div class="dock" lang="ur" dir="rtl">
+  <div class="tabs" role="tablist" aria-label="نیچے کے ٹیب">
+    <button class="tab" role="tab" data-kind="L" aria-selected="true"><span lang="ar">ا ب ت</span><small data-i="t_letters">حروف</small></button>
+    <button class="tab" role="tab" data-kind="S" aria-selected="false"><span lang="ar">با تا</span><small data-i="t_combo">ملاپ</small></button>
+    <button class="tab" role="tab" data-kind="N" aria-selected="false"><span lang="ar">١٢٣</span><small data-i="t_numbers">گنتی</small></button>
+    <button class="tab" role="tab" data-kind="C" aria-selected="false"><span>&#127912;</span><small data-i="t_colour">رنگ بھریں</small></button>
+  </div>
+</div>
+
+<script>window.I18N={"langs":[{"c":"ur","n":"اردو","d":"rtl"},{"c":"en","n":"English","d":"ltr"},{"c":"ar","n":"العربية","d":"rtl"},{"c":"fa","n":"فارسی","d":"rtl"},{"c":"ps","n":"پښتو","d":"rtl"},{"c":"sd","n":"سنڌي","d":"rtl"},{"c":"hi","n":"हिन्दी","d":"ltr"}],"ui":{"ur":{"title":"بچوں کا قاعدہ","sub":"انگلی سے نقطوں کے اوپر لکھیں","t_letters":"حروف","t_numbers":"گنتی","t_colour":"رنگ بھریں","listen":"سنیں","clear":"صاف کریں","prev":"پچھلا","next":"اگلا","erase":"رنگ ہٹائیں","good":"شاباش! بہت اچھا لکھا۔ اب اگلا دبائیں","more":"نقطوں کے اوپر پورا لکھیں","again":"دوبارہ لکھیں","pickcolour":"نیچے سے وہی رنگ چنیں جو اوپر لکھا ہے","picdone":"شاباش! یہ تصویر مکمل ہے","picdone2":"شاباش! تصویر مکمل ہو گئی۔ اب اگلا دبائیں","fillline":"{0} رنگ بھریں","choosefirst":"پہلے نیچے سے رنگ چنیں۔ اس حصے میں {0} بھریں","wrongcol":"یہ {0} ہے۔ اس حصے میں {1} بھریں","rightcol":"شاباش! یہ {0} ہے","erasehint":"رنگ ہٹانے کے لیے تصویر کے حصے پر ٹیپ کریں","novoice":"اس فون میں آواز نہیں ملی۔ نیچے \"آواز کی جانچ\" دبائیں","nosound":"آواز نہیں چل سکی۔ نیچے \"آواز کی جانچ\" دبائیں","mp3sum":"آواز (MP3) شامل کریں","mp3help":"بچے کی آواز کی MP3 فائلیں چنیں۔ نام ایسے رکھیں: حروف L01 سے L28، ملاپ (با، تا...) S01 سے S27، گنتی N1 سے N100، تصویریں W01 سے W26 اور رنگ RED، ORANGE، YELLOW، GREEN، BLUE، PURPLE، PINK، BROWN (آخر میں .mp3)۔","noclips":"ابھی کوئی MP3 شامل نہیں","nclips":"{0} آوازیں محفوظ ہیں","nclips2":"{0} آوازیں محفوظ ہیں، ابھی {1} نئی شامل ہوئیں","clearclips":"سب آوازیں ہٹائیں","ifnosound":"اگر آواز نہ آئے تو یہ بٹن دبا کر دیکھیں:","vtest":"آواز کی جانچ","vsrcl":"آواز کی قسم:","vphone":"فون یا براؤزر کی آواز (پہلی والی)","vapp":"ایپ کی اپنی آواز (ہمیشہ چلتی ہے)","v_blocked":"براؤزر نے آواز چلانے سے روکا۔ صفحے پر ایک بار ٹیپ کر کے دوبارہ دبائیں","v_appok":"ایپ کی اپنی آواز چل رہی ہے۔ سنائی نہ دے تو فون کا والیوم دیکھیں","v_appmiss":"ایپ کی آواز نہیں ملی","v_phoneready":"فون کی آواز تیار ہے","v_phonenot":"فون کی آواز ابھی تیار نہیں۔ فون کی Settings میں Text-to-speech دیکھیں","v_found":"آوازیں ملیں: {0}، عربی آواز: {1}","v_nofound":"آوازیں ملیں: {0}، عربی آواز نہیں ملی","v_nosupport":"اس براؤزر میں آواز کی سہولت نہیں ہے","t_combo":"ملاپ","noarvoice":"فون میں عربی آواز نہیں ملی۔ نیچے \"عربی آواز انسٹال کریں\" دبائیں","vinstall":"عربی آواز انسٹال کریں"},"en":{"title":"Children's Qaida (Arabic Alphabet)","sub":"Trace over the dots with your finger","t_letters":"Letters","t_numbers":"Numbers","t_colour":"Colour","listen":"Listen","clear":"Clear","prev":"Back","next":"Next","erase":"Remove colour","good":"Well done! Great writing. Press Next","more":"Write all the way over the dots","again":"Write again","pickcolour":"Pick the colour named above","picdone":"Well done! This picture is complete","picdone2":"Well done! The picture is complete. Press Next","fillline":"Fill with {0}","choosefirst":"Pick a colour first. Fill this part with {0}","wrongcol":"That is {0}. Fill this part with {1}","rightcol":"Well done! This is {0}","erasehint":"Tap a part of the picture to remove its colour","novoice":"No voice found on this device. Press \"Voice check\" below","nosound":"The voice could not play. Press \"Voice check\" below","mp3sum":"Add voice (MP3)","mp3help":"Choose MP3 files of a child's voice. Name them: letters L01–L28, joining (ba, ta…) S01–S27, numbers N1–N100, pictures W01–W26, colours RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, BROWN (all ending in .mp3).","noclips":"No MP3 added yet","nclips":"{0} voices saved","nclips2":"{0} voices saved, {1} just added","clearclips":"Remove all voices","ifnosound":"If you hear no sound, press this button:","vtest":"Voice check","vsrcl":"Voice type:","vphone":"Phone or browser voice (first one)","vapp":"The app's own voice (always works)","v_blocked":"The browser blocked the sound. Tap the page once and press again","v_appok":"The app's own voice is playing. If you can't hear it, check the volume","v_appmiss":"The app's voice was not found","v_phoneready":"The phone voice is ready","v_phonenot":"The phone voice is not ready. Check Text-to-speech in the phone's Settings","v_found":"Voices found: {0}, Arabic voice: {1}","v_nofound":"Voices found: {0}, no Arabic voice found","v_nosupport":"This browser has no voice support","t_combo":"Joining","noarvoice":"No Arabic voice on this phone. Press \"Install Arabic voice\" below","vinstall":"Install Arabic voice"},"ar":{"title":"قاعدة الأطفال","sub":"اكتب فوق النقاط بإصبعك","t_letters":"الحروف","t_numbers":"الأرقام","t_colour":"تلوين","listen":"استمع","clear":"مسح","prev":"السابق","next":"التالي","erase":"إزالة اللون","good":"أحسنت! كتابة رائعة. اضغط التالي","more":"اكتب فوق النقاط بالكامل","again":"اكتب مرة أخرى","pickcolour":"اختر اللون المكتوب أعلاه من الأسفل","picdone":"أحسنت! الصورة مكتملة","picdone2":"أحسنت! اكتملت الصورة. اضغط التالي","fillline":"املأ باللون {0}","choosefirst":"اختر لونًا أولًا. املأ هذا الجزء باللون {0}","wrongcol":"هذا {0}. املأ هذا الجزء باللون {1}","rightcol":"أحسنت! هذا {0}","erasehint":"المس جزءًا من الصورة لإزالة لونه","novoice":"لم يتم العثور على صوت. اضغط «فحص الصوت» في الأسفل","nosound":"تعذّر تشغيل الصوت. اضغط «فحص الصوت» في الأسفل","mp3sum":"إضافة صوت (MP3)","mp3help":"اختر ملفات MP3 بصوت طفل وسمِّها: الحروف L01 إلى L28، المقاطع S01 إلى S27، الأرقام N1 إلى N100، الصور W01 إلى W26، والألوان RED وORANGE وYELLOW وGREEN وBLUE وPURPLE وPINK وBROWN (بامتداد .mp3).","noclips":"لم تتم إضافة أي ملف MP3 بعد","nclips":"تم حفظ {0} ملف صوت","nclips2":"تم حفظ {0} ملف صوت، أُضيف {1} الآن","clearclips":"إزالة كل الأصوات","ifnosound":"إن لم يصدر صوت، اضغط هذا الزر:","vtest":"فحص الصوت","vsrcl":"نوع الصوت:","vphone":"صوت الهاتف أو المتصفح (الأول)","vapp":"صوت التطبيق نفسه (يعمل دائمًا)","v_blocked":"منع المتصفح تشغيل الصوت. المس الصفحة مرة ثم اضغط مجددًا","v_appok":"صوت التطبيق يعمل. إن لم تسمعه فتحقق من مستوى الصوت","v_appmiss":"لم يتم العثور على صوت التطبيق","v_phoneready":"صوت الهاتف جاهز","v_phonenot":"صوت الهاتف غير جاهز. راجع Text-to-speech في إعدادات الهاتف","v_found":"الأصوات المتاحة: {0}، الصوت العربي: {1}","v_nofound":"الأصوات المتاحة: {0}، لا يوجد صوت عربي","v_nosupport":"هذا المتصفح لا يدعم الصوت","t_combo":"المقاطع","noarvoice":"لا يوجد صوت عربي في هذا الهاتف. اضغط «تثبيت الصوت العربي» في الأسفل","vinstall":"تثبيت الصوت العربي"},"fa":{"title":"قاعده‌ی کودکان","sub":"با انگشت روی نقطه‌ها بنویسید","t_letters":"حروف","t_numbers":"اعداد","t_colour":"رنگ‌آمیزی","listen":"گوش کنید","clear":"پاک کنید","prev":"قبلی","next":"بعدی","erase":"حذف رنگ","good":"آفرین! عالی نوشتید. «بعدی» را بزنید","more":"تمام نقطه‌ها را کامل بنویسید","again":"دوباره بنویسید","pickcolour":"رنگی را که بالا نوشته شده از پایین انتخاب کنید","picdone":"آفرین! این تصویر کامل است","picdone2":"آفرین! تصویر کامل شد. «بعدی» را بزنید","fillline":"با رنگ {0} پر کنید","choosefirst":"اول یک رنگ انتخاب کنید. این قسمت را با {0} پر کنید","wrongcol":"این {0} است. این قسمت را با {1} پر کنید","rightcol":"آفرین! این {0} است","erasehint":"برای حذف رنگ روی بخشی از تصویر بزنید","novoice":"صدایی پیدا نشد. «بررسی صدا» را در پایین بزنید","nosound":"صدا پخش نشد. «بررسی صدا» را در پایین بزنید","mp3sum":"افزودن صدا (MP3)","mp3help":"فایل‌های MP3 با صدای کودک را انتخاب کنید. نام آنها: حروف L01 تا L28، ترکیب S01 تا S27، اعداد N1 تا N100، تصاویر W01 تا W26 و رنگ‌ها RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, BROWN (با پسوند .mp3).","noclips":"هنوز MP3 اضافه نشده است","nclips":"{0} صدا ذخیره شده است","nclips2":"{0} صدا ذخیره شده، {1} مورد تازه اضافه شد","clearclips":"حذف همه صداها","ifnosound":"اگر صدایی نمی‌آید این دکمه را بزنید:","vtest":"بررسی صدا","vsrcl":"نوع صدا:","vphone":"صدای گوشی یا مرورگر (اولی)","vapp":"صدای خود برنامه (همیشه کار می‌کند)","v_blocked":"مرورگر پخش صدا را مسدود کرد. یک بار روی صفحه بزنید و دوباره فشار دهید","v_appok":"صدای خود برنامه پخش می‌شود. اگر نمی‌شنوید میزان صدا را ببینید","v_appmiss":"صدای برنامه پیدا نشد","v_phoneready":"صدای گوشی آماده است","v_phonenot":"صدای گوشی آماده نیست. Text-to-speech را در تنظیمات گوشی ببینید","v_found":"صداهای موجود: {0}، صدای عربی: {1}","v_nofound":"صداهای موجود: {0}، صدای عربی پیدا نشد","v_nosupport":"این مرورگر از صدا پشتیبانی نمی‌کند","t_combo":"ترکیب","noarvoice":"صدای عربی در این گوشی نیست. «نصب صدای عربی» را در پایین بزنید","vinstall":"نصب صدای عربی"},"ps":{"title":"د ماشومانو قاعده","sub":"په ګوتې د نقطو پر سر ولیکئ","t_letters":"توري","t_numbers":"شمېرې","t_colour":"رنګول","listen":"واورئ","clear":"پاک کړئ","prev":"شاته","next":"راتلونکی","erase":"رنګ لرې کړئ","good":"شاباش! ډېر ښه مو ولیکل. راتلونکی کېکاږئ","more":"د نقطو پر سر بشپړ ولیکئ","again":"بیا ولیکئ","pickcolour":"هغه رنګ وټاکئ چې پورته لیکل شوی","picdone":"شاباش! دا انځور بشپړ دی","picdone2":"شاباش! انځور بشپړ شو. راتلونکی کېکاږئ","fillline":"د {0} رنګ ډک کړئ","choosefirst":"لومړی یو رنګ وټاکئ. دا برخه په {0} ډکه کړئ","wrongcol":"دا {0} دی. دا برخه په {1} ډکه کړئ","rightcol":"شاباش! دا {0} دی","erasehint":"د رنګ لرې کولو لپاره د انځور پر برخه کېکاږئ","novoice":"په دې وسیله کې غږ ونه موندل شو. لاندې «د غږ ازموینه» کېکاږئ","nosound":"غږ نه شو غږېدلی. لاندې «د غږ ازموینه» کېکاږئ","mp3sum":"غږ (MP3) زیات کړئ","mp3help":"د ماشوم د غږ MP3 فایلونه وټاکئ. نومونه: توري L01 تر L28، ترکیب S01 تر S27، شمېرې N1 تر N100، انځورونه W01 تر W26 او رنګونه RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, BROWN (په .mp3 پای ته).","noclips":"تر اوسه هېڅ MP3 نه دی زیات شوی","nclips":"{0} غږونه خوندي دي","nclips2":"{0} غږونه خوندي دي، اوس {1} نوي زیات شول","clearclips":"ټول غږونه لرې کړئ","ifnosound":"که غږ نه راځي دا تڼۍ کېکاږئ:","vtest":"د غږ ازموینه","vsrcl":"د غږ ډول:","vphone":"د ټلیفون یا براوزر غږ (لومړی)","vapp":"د اپ خپل غږ (تل کار کوي)","v_blocked":"براوزر غږ بند کړ. یو ځل پاڼه کېکاږئ او بیا کېکاږئ","v_appok":"د اپ خپل غږ غږېږي. که نه اورئ د غږ کچه وګورئ","v_appmiss":"د اپ غږ ونه موندل شو","v_phoneready":"د ټلیفون غږ چمتو دی","v_phonenot":"د ټلیفون غږ تر اوسه چمتو نه دی. د ټلیفون په Settings کې Text-to-speech وګورئ","v_found":"موندل شوي غږونه: {0}، عربي غږ: {1}","v_nofound":"موندل شوي غږونه: {0}، عربي غږ ونه موندل شو","v_nosupport":"دا براوزر د غږ ملاتړ نه لري","t_combo":"ترکیب","noarvoice":"په دې ټلیفون کې عربي غږ نشته. لاندې «عربي غږ نصب کړئ» کېکاږئ","vinstall":"عربي غږ نصب کړئ"},"sd":{"title":"ٻارن جو قاعدو","sub":"آڱر سان ڏٽن مٿان لکو","t_letters":"اکر","t_numbers":"انگ","t_colour":"رنگ ڀريو","listen":"ٻڌو","clear":"صاف ڪريو","prev":"پوئين","next":"اڳيون","erase":"رنگ هٽايو","good":"شاباش! تمام سٺو لکيو. اڳيون دٻايو","more":"ڏٽن مٿان پورو لکو","again":"ٻيهر لکو","pickcolour":"هيٺان اهو رنگ چونڊيو جيڪو مٿي لکيل آهي","picdone":"شاباش! هيءَ تصوير پوري آهي","picdone2":"شاباش! تصوير پوري ٿي وئي. اڳيون دٻايو","fillline":"{0} رنگ ڀريو","choosefirst":"پهرين رنگ چونڊيو. هي حصو {0} سان ڀريو","wrongcol":"هي {0} آهي. هي حصو {1} سان ڀريو","rightcol":"شاباش! هي {0} آهي","erasehint":"رنگ هٽائڻ لاءِ تصوير جي حصي تي ٽيپ ڪريو","novoice":"هن فون ۾ آواز نه مليو. هيٺ «آواز جي جاچ» دٻايو","nosound":"آواز هلائي نه سگهيو. هيٺ «آواز جي جاچ» دٻايو","mp3sum":"آواز (MP3) شامل ڪريو","mp3help":"ٻار جي آواز جون MP3 فائلون چونڊيو. نالا: اکر L01 کان L28، ميلاپ S01 کان S27، انگ N1 کان N100، تصويرون W01 کان W26 ۽ رنگ RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, BROWN (آخر ۾ .mp3).","noclips":"اڃا ڪا MP3 شامل ناهي","nclips":"{0} آواز محفوظ آهن","nclips2":"{0} آواز محفوظ آهن، هينئر {1} نوان شامل ٿيا","clearclips":"سڀ آواز هٽايو","ifnosound":"جيڪڏهن آواز نه اچي ته هي بٽڻ دٻايو:","vtest":"آواز جي جاچ","vsrcl":"آواز جو قسم:","vphone":"فون يا برائوزر جو آواز (پهريون)","vapp":"ايپ جو پنهنجو آواز (هميشه هلندو آهي)","v_blocked":"برائوزر آواز روڪيو. صفحي تي هڪ ڀيرو ٽيپ ڪري ٻيهر دٻايو","v_appok":"ايپ جو پنهنجو آواز هلي پيو. جي نه ٻڌو ته آواز جو وزن ڏسو","v_appmiss":"ايپ جو آواز نه مليو","v_phoneready":"فون جو آواز تيار آهي","v_phonenot":"فون جو آواز اڃا تيار ناهي. فون جي Settings ۾ Text-to-speech ڏسو","v_found":"مليل آواز: {0}، عربي آواز: {1}","v_nofound":"مليل آواز: {0}، عربي آواز نه مليو","v_nosupport":"هن برائوزر ۾ آواز جي سهولت ناهي","t_combo":"ميلاپ","noarvoice":"هن فون ۾ عربي آواز ناهي. هيٺ «عربي آواز انسٽال ڪريو» دٻايو","vinstall":"عربي آواز انسٽال ڪريو"},"hi":{"title":"बच्चों का क़ायदा","sub":"उंगली से बिंदुओं के ऊपर लिखें","t_letters":"हर्फ़","t_numbers":"गिनती","t_colour":"रंग भरें","listen":"सुनें","clear":"साफ़ करें","prev":"पिछला","next":"अगला","erase":"रंग हटाएँ","good":"शाबाश! बहुत अच्छा लिखा। अब अगला दबाएँ","more":"बिंदुओं के ऊपर पूरा लिखें","again":"फिर से लिखें","pickcolour":"नीचे से वही रंग चुनें जो ऊपर लिखा है","picdone":"शाबाश! यह तस्वीर पूरी है","picdone2":"शाबाश! तस्वीर पूरी हो गई। अब अगला दबाएँ","fillline":"{0} रंग भरें","choosefirst":"पहले एक रंग चुनें। इस हिस्से में {0} भरें","wrongcol":"यह {0} है। इस हिस्से में {1} भरें","rightcol":"शाबाश! यह {0} है","erasehint":"रंग हटाने के लिए तस्वीर के हिस्से पर टैप करें","novoice":"इस फ़ोन में आवाज़ नहीं मिली। नीचे \"आवाज़ की जाँच\" दबाएँ","nosound":"आवाज़ नहीं चल सकी। नीचे \"आवाज़ की जाँच\" दबाएँ","mp3sum":"आवाज़ (MP3) जोड़ें","mp3help":"बच्चे की आवाज़ की MP3 फ़ाइलें चुनें। नाम ऐसे रखें: हर्फ़ L01 से L28, मिलाप (बा, ता…) S01 से S27, गिनती N1 से N100, तस्वीरें W01 से W26 और रंग RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK, BROWN (आख़िर में .mp3)।","noclips":"अभी कोई MP3 नहीं जुड़ी","nclips":"{0} आवाज़ें सहेजी हैं","nclips2":"{0} आवाज़ें सहेजी हैं, अभी {1} नई जुड़ीं","clearclips":"सभी आवाज़ें हटाएँ","ifnosound":"अगर आवाज़ न आए तो यह बटन दबाएँ:","vtest":"आवाज़ की जाँच","vsrcl":"आवाज़ का प्रकार:","vphone":"फ़ोन या ब्राउज़र की आवाज़ (पहली वाली)","vapp":"ऐप की अपनी आवाज़ (हमेशा चलती है)","v_blocked":"ब्राउज़र ने आवाज़ रोक दी। पेज पर एक बार टैप करके फिर दबाएँ","v_appok":"ऐप की अपनी आवाज़ चल रही है। न सुनाई दे तो वॉल्यूम देखें","v_appmiss":"ऐप की आवाज़ नहीं मिली","v_phoneready":"फ़ोन की आवाज़ तैयार है","v_phonenot":"फ़ोन की आवाज़ अभी तैयार नहीं। फ़ोन की Settings में Text-to-speech देखें","v_found":"मिली आवाज़ें: {0}, अरबी आवाज़: {1}","v_nofound":"मिली आवाज़ें: {0}, अरबी आवाज़ नहीं मिली","v_nosupport":"इस ब्राउज़र में आवाज़ की सुविधा नहीं है","t_combo":"मिलाप","noarvoice":"फ़ोन में अरबी आवाज़ नहीं मिली। नीचे \"अरबी आवाज़ इंस्टॉल करें\" दबाएँ","vinstall":"अरबी आवाज़ इंस्टॉल करें"}},"colors":{"ur":["لال","نارنجی","پیلا","ہرا","نیلا","جامنی","گلابی","بھورا"],"en":["Red","Orange","Yellow","Green","Blue","Purple","Pink","Brown"],"ar":["أحمر","برتقالي","أصفر","أخضر","أزرق","بنفسجي","وردي","بني"],"fa":["قرمز","نارنجی","زرد","سبز","آبی","بنفش","صورتی","قهوه‌ای"],"ps":["سور","نارنجي","ژیړ","شین","نیلي","ارغواني","ګلابي","نسواري"],"sd":["ڳاڙهو","نارنگي","پيلو","سائو","نيرو","واڱڻائي","گلابي","ناسي"],"hi":["लाल","नारंगी","पीला","हरा","नीला","बैंगनी","गुलाबी","भूरा"]}};</script>
+<script>
+(function(){
+'use strict';
+var root = document.documentElement;
+var $ = function(id){ return document.getElementById(id); };
+
+/* ---- content: 28 Arabic letters ----
+   [letter, Arabic name (spoken), Urdu name, English name, Hindi name, English syllable, Hindi syllable] */
+var LET = [
+ ['ا','ألف','الف','alif','अलिफ़','aa','आ'],
+ ['ب','باء','بے','baa','बे','ba','बा'],
+ ['ت','تاء','تے','taa','ते','ta','ता'],
+ ['ث','ثاء','ثے','thaa','से','tha','सा'],
+ ['ج','جيم','جیم','jeem','जीम','ja','जा'],
+ ['ح','حاء','حے','haa','हे','ha','हा'],
+ ['خ','خاء','خے','khaa','ख़े','kha','ख़ा'],
+ ['د','دال','دال','daal','दाल','da','दा'],
+ ['ذ','ذال','ذال','dhaal','ज़ाल','dha','ज़ा'],
+ ['ر','راء','رے','raa','रे','ra','रा'],
+ ['ز','زاي','زے','zaay','ज़े','za','ज़ा'],
+ ['س','سين','سین','seen','सीन','sa','सा'],
+ ['ش','شين','شین','sheen','शीन','sha','शा'],
+ ['ص','صاد','صاد','saad','साद','sa','सा'],
+ ['ض','ضاد','ضاد','daad','ज़ाद','da','दा'],
+ ['ط','طاء','طوئے','Taa','तोय','ta','ता'],
+ ['ظ','ظاء','ظوئے','Zaa','ज़ोय','za','ज़ा'],
+ ['ع','عين','عین','ayn','ऐन','a','आ'],
+ ['غ','غين','غین','ghayn','ग़ैन','gha','ग़ा'],
+ ['ف','فاء','فے','faa','फ़े','fa','फ़ा'],
+ ['ق','قاف','قاف','qaaf','क़ाफ़','qa','क़ा'],
+ ['ك','كاف','کاف','kaaf','काफ़','ka','का'],
+ ['ل','لام','لام','laam','लाम','la','ला'],
+ ['م','ميم','میم','meem','मीम','ma','मा'],
+ ['ن','نون','نون','noon','नून','na','ना'],
+ ['ه','هاء','ہے','haa','हे','ha','हा'],
+ ['و','واو','واؤ','waaw','वाव','wa','वा'],
+ ['ي','ياء','یے','yaa','ये','ya','या']
+];
+var ALIF = LET[0];
+function letterByCh(c){ for (var i = 0; i < LET.length; i++) if (LET[i][0] === c) return LET[i]; return LET[0]; }
+
+/* ---- numbers 1..100 in Arabic ---- */
+var ONES_AR = ['واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة'];
+var TEENS_AR = ['عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر'];
+var TENS_AR = ['عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+var ONES_EN = ['wahid','ithnan','thalatha','arba\u2019a','khamsa','sitta','sab\u2019a','thamaniya','tis\u2019a'];
+var TEENS_EN = ['ashara','ahada ashar','ithna ashar','thalathata ashar','arba\u2019ata ashar','khamsata ashar','sittata ashar','sab\u2019ata ashar','thamaniyata ashar','tis\u2019ata ashar'];
+var TENS_EN = ['ishroon','thalathoon','arba\u2019oon','khamsoon','sittoon','sab\u2019oon','thamanoon','tis\u2019oon'];
+var ONES_HI = ['वाहिद','इस्नान','सलासा','अरबआ','ख़म्सा','सित्ता','सबआ','समानिया','तिसआ'];
+var TEENS_HI = ['अशरा','अहद अशर','इस्ना अशर','सलासता अशर','अरबअता अशर','ख़म्सता अशर','सित्तता अशर','सबअता अशर','समानियता अशर','तिसअता अशर'];
+var TENS_HI = ['इशरून','सलासून','अरबऊन','ख़मसून','सित्तून','सबऊन','समानून','तिसऊन'];
+function toAr(n){ return String(n).replace(/\d/g, function(d){ return '٠١٢٣٤٥٦٧٨٩'.charAt(d); }); }
+var NUMS = [];
+(function(){
+  for (var n = 1; n <= 100; n++) {
+    var ar, en, hi;
+    if (n === 100) { ar = 'مئة'; en = 'mi\u2019a'; hi = 'मिअः'; }
+    else if (n < 10) { ar = ONES_AR[n-1]; en = ONES_EN[n-1]; hi = ONES_HI[n-1]; }
+    else if (n < 20) { ar = TEENS_AR[n-10]; en = TEENS_EN[n-10]; hi = TEENS_HI[n-10]; }
+    else {
+      var t = Math.floor(n / 10) - 2, o = n % 10;
+      ar = o ? ONES_AR[o-1] + ' و' + TENS_AR[t] : TENS_AR[t];
+      en = o ? ONES_EN[o-1] + ' wa ' + TENS_EN[t] : TENS_EN[t];
+      hi = o ? ONES_HI[o-1] + ' व ' + TENS_HI[t] : TENS_HI[t];
+    }
+    NUMS.push({ch: toAr(n), key: 'N' + n, tts: ar, ar: ar, en: en, hi: hi});
+  }
+})();
+
+/* ---- sets ---- */
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+var SETS = {
+  'ABC': LET.map(function(l, i){
+    return {ch: l[0], key: l[0], file: 'L' + pad2(i + 1), tts: l[1], ar: l[1], ur: l[2], en: l[3], hi: l[4]};
+  }),
+  'SYL': LET.slice(1).map(function(l, i){
+    return {ch: l[0] + 'ا', key: 'S' + l[0], file: 'S' + pad2(i + 1), base: l[0], tts: l[0] + '\u064E' + 'ا',
+            ar: l[0] + 'ا', en: l[5], hi: l[6]};
+  }),
+  '123': NUMS.map(function(n){ n.file = n.key; return n; })
+};
+
+var UP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+function star(cx, cy, R, r){
+  var pts = [];
+  for (var i = 0; i < 10; i++) {
+    var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r : R;
+    pts.push((cx + rr * Math.cos(a)).toFixed(1) + ' ' + (cy + rr * Math.sin(a)).toFixed(1));
+  }
+  return 'M' + pts.join(' L') + ' Z';
+}
+function rays(cx, cy, r1, r2, hw, n){
+  var out = '';
+  for (var i = 0; i < n; i++) {
+    var a = i * 2 * Math.PI / n, ca = Math.cos(a), sa = Math.sin(a), px = -sa, py = ca;
+    var bx = cx + r1 * ca, by = cy + r1 * sa, tx = cx + r2 * ca, ty = cy + r2 * sa;
+    out += '<path class="f" d="M' + (bx + hw * px).toFixed(1) + ' ' + (by + hw * py).toFixed(1) +
+      ' L' + tx.toFixed(1) + ' ' + ty.toFixed(1) +
+      ' L' + (bx - hw * px).toFixed(1) + ' ' + (by - hw * py).toFixed(1) + ' Z"/>';
+  }
+  return out;
+}
+var PIC_DATA = [
+ ['Apple','ایپل', `<path class="f" d="M100 52 C74 30 32 50 36 98 C40 140 70 166 100 154 C130 166 160 140 164 98 C168 50 126 30 100 52 Z"/>
+  <path class="f" d="M97 56 C94 42 96 30 104 20 L113 24 C109 34 107 46 107 56 Z"/>
+  <path class="f" d="M110 40 C122 18 150 14 162 24 C152 46 128 52 110 40 Z"/>
+  <path class="l" d="M58 84 C54 100 58 114 66 124"/>`],
+ ['Ball','بال', `<circle class="f" cx="100" cy="90" r="68"/>
+  <path class="f" d="M40 68 C78 100 122 100 160 68 L164 94 C124 126 76 126 36 94 Z"/>
+  <path class="f" d="M100 24 C84 58 84 122 100 156 C116 122 116 58 100 24 Z"/>
+  <circle class="f" cx="100" cy="90" r="12"/>`],
+ ['Cat','کیٹ', `<path class="f" d="M48 70 L52 22 L88 48 Z"/>
+  <path class="f" d="M152 70 L148 22 L112 48 Z"/>
+  <ellipse class="f" cx="100" cy="98" rx="62" ry="54"/>
+  <circle class="f" cx="78" cy="90" r="9"/><circle class="f" cx="122" cy="90" r="9"/>
+  <path class="f" d="M92 108 L108 108 L100 118 Z"/>
+  <path class="l" d="M100 118 C100 128 90 130 86 126 M100 118 C100 128 110 130 114 126"/>
+  <path class="l" d="M34 104 L64 110 M34 124 L64 120 M166 104 L136 110 M166 124 L136 120"/>`],
+ ['Duck','ڈک', `<path class="f" d="M44 108 L24 90 L40 130 Z"/>
+  <ellipse class="f" cx="100" cy="120" rx="60" ry="38"/>
+  <circle class="f" cx="140" cy="68" r="28"/>
+  <path class="f" d="M162 64 L190 72 L162 82 Z"/>
+  <circle class="f" cx="146" cy="60" r="5"/>
+  <path class="f" d="M70 116 C80 96 110 96 118 120 C104 134 82 134 70 116 Z"/>
+  <path class="l" d="M20 164 C40 154 60 174 80 164 C100 154 120 174 140 164 C160 154 170 170 184 164"/>`],
+ ['Egg','ایگ', `<path class="f" d="M40 90 C34 60 70 40 96 52 C122 34 166 52 160 88 C176 110 156 150 118 142 C96 160 52 150 54 122 C32 118 34 100 40 90 Z"/>
+  <circle class="f" cx="98" cy="96" r="28"/>
+  <circle class="f" cx="88" cy="86" r="7"/>`],
+ ['Fish','فش', `<path class="f" d="M136 80 L178 50 L170 92 L178 130 Z"/>
+  <path class="f" d="M30 92 C50 50 110 44 140 80 C110 130 50 134 30 92 Z"/>
+  <path class="f" d="M70 64 C84 40 104 44 108 58 Z"/>
+  <path class="l" d="M82 70 C92 86 92 100 82 114"/>
+  <circle class="f" cx="56" cy="84" r="6"/>
+  <circle class="f" cx="20" cy="50" r="6"/><circle class="f" cx="34" cy="28" r="4"/>`],
+ ['Grapes','گریپس', `<path class="l" d="M100 50 C100 38 104 28 112 22"/>
+  <path class="f" d="M108 38 C124 14 156 16 164 28 C150 50 126 52 108 38 Z"/>
+  <circle class="f" cx="64" cy="70" r="20"/><circle class="f" cx="100" cy="70" r="20"/><circle class="f" cx="136" cy="70" r="20"/>
+  <circle class="f" cx="82" cy="102" r="20"/><circle class="f" cx="118" cy="102" r="20"/>
+  <circle class="f" cx="100" cy="134" r="20"/>`],
+ ['House','ہاؤس', `<rect class="f" x="40" y="86" width="120" height="76"/>
+  <rect class="f" x="128" y="38" width="18" height="34"/>
+  <path class="f" d="M28 90 L100 28 L172 90 Z"/>
+  <rect class="f" x="88" y="118" width="26" height="44"/>
+  <rect class="f" x="52" y="104" width="24" height="24"/><rect class="f" x="126" y="104" width="24" height="24"/>
+  <path class="l" d="M64 104 L64 128 M52 116 L76 116 M138 104 L138 128 M126 116 L150 116"/>`],
+ ['Ice cream','آئس کریم', `<path class="f" d="M62 100 L138 100 L100 168 Z"/>
+  <path class="l" d="M74 110 L100 150 M126 110 L100 150 M88 104 L116 134 M112 104 L84 134"/>
+  <circle class="f" cx="100" cy="86" r="34"/>
+  <circle class="f" cx="100" cy="50" r="26"/>
+  <circle class="f" cx="100" cy="22" r="9"/>`],
+ ['Jug','جگ', `<path class="f" d="M142 74 C182 70 186 132 134 140 L132 126 C160 122 160 90 140 90 Z"/>
+  <path class="f" d="M62 58 L138 58 C152 92 152 130 128 160 L72 160 C48 130 48 92 62 58 Z"/>
+  <rect class="f" x="68" y="44" width="64" height="16" rx="6"/>
+  <circle class="f" cx="100" cy="108" r="20"/>`],
+ ['Kite','کائٹ', `<path class="f" d="M100 10 L100 68 L50 68 Z"/>
+  <path class="f" d="M100 10 L150 68 L100 68 Z"/>
+  <path class="f" d="M50 68 L100 68 L100 140 Z"/>
+  <path class="f" d="M150 68 L100 140 L100 68 Z"/>
+  <path class="l" d="M100 140 C86 150 114 156 100 166"/>
+  <path class="f" d="M84 148 L100 154 L84 160 Z"/><path class="f" d="M116 148 L100 154 L116 160 Z"/>`],
+ ['Lamp','لیمپ', `<rect class="f" x="94" y="84" width="12" height="66"/>
+  <ellipse class="f" cx="100" cy="156" rx="42" ry="12"/>
+  <path class="f" d="M62 20 L138 20 L160 84 L40 84 Z"/>
+  <path class="f" d="M72 34 L128 34 L132 50 L68 50 Z"/>`],
+ ['Moon','مون', `<path class="f" d="M112 26 C66 26 30 58 30 98 C30 138 66 168 112 160 C74 150 56 124 56 94 C56 62 76 38 112 26 Z"/>
+  <path class="f" d="${star(150,58,18,8)}"/>
+  <path class="f" d="${star(162,116,13,6)}"/>
+  <path class="f" d="${star(126,98,8,3.6)}"/>`],
+ ['Nest','نیسٹ', `<ellipse class="f" cx="66" cy="92" rx="20" ry="26"/>
+  <ellipse class="f" cx="100" cy="84" rx="21" ry="27"/>
+  <ellipse class="f" cx="134" cy="92" rx="20" ry="26"/>
+  <path class="f" d="M24 100 C26 168 174 168 176 100 C150 112 50 112 24 100 Z"/>
+  <path class="l" d="M44 124 C80 140 120 140 156 124 M54 142 C86 154 114 154 146 142"/>`],
+ ['Orange','اورنج', `<circle class="f" cx="100" cy="100" r="62"/>
+  <rect class="f" x="96" y="26" width="8" height="16"/>
+  <path class="f" d="M106 36 C122 12 152 12 162 24 C148 46 124 48 106 36 Z"/>
+  <circle class="f" cx="76" cy="78" r="10"/>`],
+ ['Pencil','پینسل', `<g transform="rotate(35 100 90)">
+  <rect class="f" x="82" y="14" width="36" height="24" rx="6"/>
+  <rect class="f" x="82" y="38" width="36" height="14"/>
+  <rect class="f" x="82" y="52" width="36" height="78"/>
+  <path class="f" d="M82 130 L118 130 L100 164 Z"/>
+  <path class="f" d="M93 150 L107 150 L100 164 Z"/>
+  <path class="l" d="M100 52 L100 130"/></g>`],
+ ['Quilt','کوئلٹ', `<rect class="f" x="34" y="14" width="44" height="44"/><rect class="f" x="78" y="14" width="44" height="44"/><rect class="f" x="122" y="14" width="44" height="44"/>
+  <rect class="f" x="34" y="58" width="44" height="44"/><rect class="f" x="78" y="58" width="44" height="44"/><rect class="f" x="122" y="58" width="44" height="44"/>
+  <rect class="f" x="34" y="102" width="44" height="44"/><rect class="f" x="78" y="102" width="44" height="44"/><rect class="f" x="122" y="102" width="44" height="44"/>`],
+ ['Rainbow','رینبو', `<path class="f" d="M16 134 A84 84 0 0 1 184 134 Z"/>
+  <path class="f" d="M30 134 A70 70 0 0 1 170 134 Z"/>
+  <path class="f" d="M44 134 A56 56 0 0 1 156 134 Z"/>
+  <path class="f" d="M58 134 A42 42 0 0 1 142 134 Z"/>
+  <circle class="f" cx="22" cy="148" r="12"/><circle class="f" cx="40" cy="140" r="14"/><circle class="f" cx="58" cy="150" r="11"/>
+  <circle class="f" cx="178" cy="148" r="12"/><circle class="f" cx="160" cy="140" r="14"/><circle class="f" cx="142" cy="150" r="11"/>`],
+ ['Sun','سن', `${rays(100,88,54,78,11,8)}
+  <circle class="f" cx="100" cy="88" r="48"/>
+  <circle class="f" cx="86" cy="80" r="5"/><circle class="f" cx="114" cy="80" r="5"/>
+  <path class="l" d="M82 102 C92 118 108 118 118 102"/>`],
+ ['Tree','ٹری', `<rect class="f" x="86" y="112" width="28" height="56"/>
+  <circle class="f" cx="100" cy="56" r="38"/><circle class="f" cx="64" cy="96" r="32"/><circle class="f" cx="136" cy="96" r="32"/>
+  <circle class="f" cx="84" cy="54" r="7"/><circle class="f" cx="116" cy="70" r="7"/><circle class="f" cx="66" cy="100" r="7"/><circle class="f" cx="134" cy="102" r="7"/>
+  <path class="l" d="M24 168 L176 168"/>`],
+ ['Umbrella','امبریلا', `<path class="f" d="M20 90 A80 80 0 0 1 43.4 33.4 L60 90 Q40 102 20 90 Z"/>
+  <path class="f" d="M43.4 33.4 A80 80 0 0 1 100 10 L100 90 Q80 102 60 90 Z"/>
+  <path class="f" d="M100 10 A80 80 0 0 1 156.6 33.4 L140 90 Q120 102 100 90 Z"/>
+  <path class="f" d="M156.6 33.4 A80 80 0 0 1 180 90 Q160 102 140 90 Z"/>
+  <path class="l" d="M100 100 L100 150 C100 168 80 168 78 152"/>`],
+ ['Van','وین', `<path class="f" d="M20 134 L20 80 C20 72 26 66 34 66 L116 66 L156 100 L180 108 L180 134 Z"/>
+  <path class="f" d="M122 76 L148 98 L122 98 Z"/>
+  <rect class="f" x="36" y="80" width="30" height="24"/><rect class="f" x="76" y="80" width="30" height="24"/>
+  <circle class="f" cx="56" cy="136" r="18"/><circle class="f" cx="144" cy="136" r="18"/>
+  <circle class="f" cx="56" cy="136" r="7"/><circle class="f" cx="144" cy="136" r="7"/>
+  <path class="l" d="M10 158 L190 158"/>`],
+ ['Watermelon','واٹر میلن', `<g transform="translate(0,-12)">
+  <path class="f" d="M20 70 A80 80 0 0 0 180 70 Z"/>
+  <path class="f" d="M28 70 A72 72 0 0 0 172 70 Z"/>
+  <path class="f" d="M36 70 A64 64 0 0 0 164 70 Z"/>
+  <ellipse class="f" cx="76" cy="94" rx="5" ry="8"/><ellipse class="f" cx="124" cy="94" rx="5" ry="8"/>
+  <ellipse class="f" cx="100" cy="112" rx="5" ry="8"/><ellipse class="f" cx="100" cy="84" rx="5" ry="8"/></g>`],
+ ['Xylophone','زائلوفون', `<path class="f" d="M20 16 L34 16 L62 160 L48 160 Z"/>
+  <path class="f" d="M180 16 L166 16 L138 160 L152 160 Z"/>
+  <rect class="f" x="30" y="22" width="140" height="18" rx="5"/>
+  <rect class="f" x="35" y="46" width="130" height="18" rx="5"/>
+  <rect class="f" x="40" y="70" width="120" height="18" rx="5"/>
+  <rect class="f" x="45" y="94" width="110" height="18" rx="5"/>
+  <rect class="f" x="50" y="118" width="100" height="18" rx="5"/>
+  <rect class="f" x="55" y="142" width="90" height="18" rx="5"/>`],
+ ['Yacht','یاٹ', `<path class="l" d="M100 26 L100 120"/>
+  <path class="f" d="M106 30 L106 114 L164 114 Z"/>
+  <path class="f" d="M94 46 L94 114 L46 114 Z"/>
+  <path class="f" d="M100 26 L100 12 L122 19 Z"/>
+  <path class="f" d="M24 120 L176 120 L150 152 L50 152 Z"/>
+  <path class="l" d="M12 164 C32 154 52 174 72 164 C92 154 112 174 132 164 C152 154 172 174 188 164"/>`],
+ ['Zebra','زیبرا', `<rect class="f" x="50" y="120" width="12" height="46"/><rect class="f" x="70" y="120" width="12" height="46"/>
+  <rect class="f" x="118" y="120" width="12" height="46"/><rect class="f" x="136" y="120" width="12" height="46"/>
+  <rect class="f" x="40" y="70" width="110" height="56" rx="16"/>
+  <path class="f" d="M138 80 L152 38 L186 42 L192 64 L174 68 L166 96 L146 100 Z"/>
+  <path class="f" d="M156 38 L160 20 L172 40 Z"/>
+  <circle class="f" cx="178" cy="52" r="4"/>
+  <rect class="f" x="56" y="74" width="10" height="48"/><rect class="f" x="80" y="74" width="10" height="48"/><rect class="f" x="104" y="74" width="10" height="48"/>
+  <path class="l" d="M40 84 C24 88 22 108 28 120"/>`]
+];
+var PCOLS = {A:[0,7,3],B:[2,4,0,1],C:[1,1,1,3,3,6],D:[2,2,2,1,7,1],E:[7,2,1],F:[1,1,2,7,4,4],G:[3,5,5,5,5,5,5],H:[2,0,7,4,4,4],I:[7,6,2,0],J:[4,4,5,2],K:[0,2,3,4,6,6],L:[7,7,2,1],M:[2,1,1,1],N:[6,4,2,7],O:[1,7,3,2],P:[6,5,2,1,7],Q:[0,1,2,3,4,5,6,7,0],R:[0,1,2,3,4,4,4,4,4,4],S:[1,1,1,1,1,1,1,1,2,7,7],T:[7,3,3,3,0,0,0,0],U:[0,2,4,5],V:[2,4,4,4,7,7,1,1],W:[3,2,0,7,7,7,7],X:[7,7,0,1,2,3,4,5],Y:[2,1,0,7],Z:[5,5,5,5,2,2,7,7,5,5,5]};
+
+
+/* paint pictures: same drawings, now with Arabic words, sorted by first letter */
+var PW = [
+ ['تفاحة','سیب','सेब'], ['كرة','گیند','गेंद'], ['قطة','بلی','बिल्ली'], ['بطة','بطخ','बत्तख़'],
+ ['بيضة','انڈا','अंडा'], ['سمكة','مچھلی','मछली'], ['عنب','انگور','अंगूर'], ['بيت','گھر','घर'],
+ ['آيس كريم','آئس کریم','आइसक्रीम'], ['إبريق','جگ','जग'], ['طائرة ورقية','پتنگ','पतंग'], ['مصباح','چراغ','चिराग़'],
+ ['قمر','چاند','चाँद'], ['عش','گھونسلا','घोंसला'], ['برتقالة','مالٹا','संतरा'], ['قلم','پینسل','पेंसिल'],
+ ['لحاف','رضائی','रज़ाई'], ['قوس قزح','دھنک','इंद्रधनुष'], ['شمس','سورج','सूरज'], ['شجرة','درخت','पेड़'],
+ ['مظلة','چھتری','छाता'], ['حافلة','وین','वैन'], ['بطيخ','تربوز','तरबूज़'], ['إكسيليفون','زائلوفون','ज़ाइलोफ़ोन'],
+ ['يخت','کشتی','नाव'], ['حمار وحشي','زیبرا','ज़ेबरा']
+];
+function initialOf(w){
+  var c = w.charAt(0);
+  return (c === 'آ' || c === 'أ' || c === 'إ') ? 'ا' : c;
+}
+function letterIdx(c){ for (var i = 0; i < LET.length; i++) if (LET[i][0] === c) return i; return 99; }
+var PAINT_ITEMS = PIC_DATA.map(function(d, i){
+  var w = PW[i];
+  return {orig: i, ch: initialOf(w[0]), chip: initialOf(w[0]), key: w[0], word: w[0], tts: w[0],
+          ur: w[1], hi: w[2], en: d[0], svg: d[2], cols: PCOLS[UP[i]]};
+});
+PAINT_ITEMS.sort(function(a, b){ return letterIdx(a.ch) - letterIdx(b.ch) || a.orig - b.orig; });
+PAINT_ITEMS.forEach(function(p, i){ p.file = 'W' + pad2(i + 1); });
+SETS.PAINT = PAINT_ITEMS;
+
+/* ---- state ---- */
+var mode = 'ABC', idx = 0, color = 0;
+var strokes = [], passed = false;
+var S = 300, dpr = 1;
+var FONT = "'Noto Naskh Arabic','Droid Arabic Naskh','Amiri','Traditional Arabic',serif";
+var masks = null, evalTimer = null, lay = {};
+var done = {};
+try { done = JSON.parse(localStorage.getItem('qd-done') || '{}') || {}; } catch(e) { done = {}; }
+function saveDone(){ try { localStorage.setItem('qd-done', JSON.stringify(done)); } catch(e) {} }
+function K(it){ return it.key || it.ch; }
+function isDone(m, k){ return !!(done[m] && done[m].indexOf(k) > -1); }
+function markDone(m, k){ if(!done[m]) done[m] = []; if(done[m].indexOf(k) < 0){ done[m].push(k); saveDone(); } }
+
+var items = function(){ return SETS[mode]; };
+var cur = function(){ return SETS[mode][idx]; };
+
+/* ---- theme colors ---- */
+function cssVar(n){ return getComputedStyle(root).getPropertyValue(n).trim(); }
+function crayon(i){ return cssVar('--c' + i) || '#2447D6'; }
+
+/* ---- canvases ---- */
+var pad = $('pad'), guide = $('guide'), inkC = $('ink');
+var g = guide.getContext('2d'), ictx = inkC.getContext('2d');
+var picEl = $('pic');
+var strokeC = document.createElement('canvas'), sctx = strokeC.getContext('2d');
+var maskC = document.createElement('canvas'), mkctx = maskC.getContext('2d');
+var inkPending = false;
+
+function setSize(){
+  var r = pad.getBoundingClientRect();
+  S = Math.max(160, Math.round(r.width));
+  dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+  [guide, inkC, strokeC, maskC].forEach(function(c){ c.width = Math.round(S * dpr); c.height = Math.round(S * dpr); });
+  masks = null; lay = {};
+  drawGuide();
+  redrawInk();
+}
+
+/* where and how big to draw the current letter so it always fits the board */
+var mctx = document.createElement('canvas').getContext('2d');
+function layoutOf(ch){
+  var k = ch + '|' + S;
+  if (lay[k]) return lay[k];
+  var b = 200;
+  mctx.font = '700 ' + b + 'px ' + FONT; mctx.textAlign = 'center'; mctx.textBaseline = 'alphabetic';
+  var m = mctx.measureText(ch);
+  var L = m.actualBoundingBoxLeft, R = m.actualBoundingBoxRight, A = m.actualBoundingBoxAscent, D = m.actualBoundingBoxDescent;
+  if (!(L + R > 0) || !(A + D > 0)) { L = m.width / 2; R = m.width / 2; A = b * 0.7; D = b * 0.2; }
+  var f = Math.min(S * 0.84 / (L + R), S * 0.6 / (A + D));
+  var fs = Math.min(b * f, S * 0.85), s = fs / b;
+  var o = {fs: fs, x: S / 2 + (L - R) * s / 2, y: S / 2 + (A - D) * s / 2 - S * 0.02};
+  lay[k] = o;
+  return o;
+}
+
+function drawGuide(){
+  g.setTransform(dpr,0,0,dpr,0,0);
+  g.clearRect(0,0,S,S);
+  if (mode === 'PAINT') return;
+  var ch = cur().ch, o = layoutOf(ch), m = S * 0.04;
+  g.lineWidth = 3; g.lineCap = 'butt'; g.setLineDash([]);
+  g.strokeStyle = cssVar('--line');
+  g.beginPath(); g.moveTo(m, o.y); g.lineTo(S - m, o.y); g.stroke();
+  g.font = '700 ' + o.fs + 'px ' + FONT;
+  g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  g.fillStyle = cssVar('--guide-fill');
+  g.fillText(ch, o.x, o.y);
+  g.lineJoin = 'round'; g.lineCap = 'round';
+  g.lineWidth = Math.max(3, S * 0.012);
+  g.strokeStyle = cssVar('--guide-dot');
+  g.setLineDash([0.1, S * 0.036]);
+  g.strokeText(ch, o.x, o.y);
+  g.setLineDash([]);
+  buildInkMask();
+}
+
+/* the child's colour only shows inside the letter */
+function buildInkMask(){
+  mkctx.setTransform(dpr,0,0,dpr,0,0);
+  mkctx.clearRect(0,0,S,S);
+  if (mode === 'PAINT') return;
+  var ch = cur().ch, o = layoutOf(ch);
+  mkctx.font = '700 ' + o.fs + 'px ' + FONT; mkctx.textAlign = 'center'; mkctx.textBaseline = 'alphabetic';
+  mkctx.fillStyle = '#000'; mkctx.strokeStyle = '#000'; mkctx.lineJoin = 'round';
+  mkctx.lineWidth = Math.max(3, S * 0.016);
+  mkctx.fillText(ch, o.x, o.y); mkctx.strokeText(ch, o.x, o.y);
+}
+function composeInk(){
+  inkPending = false;
+  ictx.setTransform(dpr,0,0,dpr,0,0);
+  ictx.globalCompositeOperation = 'source-over';
+  ictx.clearRect(0,0,S,S);
+  ictx.drawImage(strokeC, 0, 0, S, S);
+  ictx.globalCompositeOperation = 'destination-in';
+  ictx.drawImage(maskC, 0, 0, S, S);
+  ictx.globalCompositeOperation = 'source-over';
+}
+function scheduleInk(){
+  if (inkPending) return;
+  inkPending = true;
+  if (window.requestAnimationFrame) requestAnimationFrame(composeInk); else setTimeout(composeInk, 16);
+}
+
+function lw(){ return S * 0.07; }
+function drawDot(p, col){
+  sctx.fillStyle = col; sctx.beginPath(); sctx.arc(p[0]*S, p[1]*S, lw()/2, 0, Math.PI*2); sctx.fill();
+}
+function drawSeg(a, b, col){
+  sctx.strokeStyle = col; sctx.lineWidth = lw(); sctx.lineCap = 'round'; sctx.lineJoin = 'round';
+  sctx.beginPath(); sctx.moveTo(a[0]*S, a[1]*S); sctx.lineTo(b[0]*S, b[1]*S); sctx.stroke();
+}
+function redrawInk(){
+  sctx.setTransform(dpr,0,0,dpr,0,0);
+  sctx.clearRect(0,0,S,S);
+  strokes.forEach(function(s){
+    var col = crayon(s.c);
+    if (s.pts.length === 1) { drawDot(s.pts[0], col); return; }
+    for (var i = 1; i < s.pts.length; i++) drawSeg(s.pts[i-1], s.pts[i], col);
+  });
+  composeInk();
+}
+
+/* ---- drawing ---- */
+var drawing = false, curStroke = null, curCol = '#000';
+function pos(e){
+  var r = inkC.getBoundingClientRect();
+  return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height];
+}
+inkC.addEventListener('pointerdown', function(e){
+  e.preventDefault();
+  try { inkC.setPointerCapture(e.pointerId); } catch(err) {}
+  drawing = true;
+  curCol = crayon(color);
+  unlockSpeech();
+  var p = pos(e);
+  curStroke = {c: color, pts: [p]};
+  strokes.push(curStroke);
+  sctx.setTransform(dpr,0,0,dpr,0,0);
+  drawDot(p, curCol);
+  scheduleInk();
+});
+inkC.addEventListener('pointermove', function(e){
+  if (!drawing || !curStroke) return;
+  e.preventDefault();
+  var evs = (e.getCoalescedEvents && e.getCoalescedEvents().length) ? e.getCoalescedEvents() : [e];
+  for (var i = 0; i < evs.length; i++) {
+    var p = pos(evs[i]), prev = curStroke.pts[curStroke.pts.length - 1];
+    drawSeg(prev, p, curCol);
+    curStroke.pts.push(p);
+  }
+  scheduleInk();
+});
+function endStroke(){
+  if (!drawing) return;
+  drawing = false; curStroke = null;
+  clearTimeout(evalTimer);
+  evalTimer = setTimeout(evaluate, 350);
+}
+inkC.addEventListener('pointerup', endStroke);
+inkC.addEventListener('pointercancel', endStroke);
+inkC.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+
+/* ---- checking how well the child traced ---- */
+var N = 96;
+function alphaOf(x){
+  var d = x.getImageData(0,0,N,N).data, out = new Uint8Array(N*N), n = 0;
+  for (var i = 0; i < N*N; i++) { if (d[i*4+3] > 100) { out[i] = 1; n++; } }
+  return {a: out, n: n};
+}
+function buildMasks(){
+  var c = document.createElement('canvas'); c.width = c.height = N;
+  var x = c.getContext('2d'), k = N / S, ch = cur().ch, o = layoutOf(ch);
+  x.setTransform(k,0,0,k,0,0);
+  x.font = '700 ' + o.fs + 'px ' + FONT; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
+  x.lineJoin = 'round'; x.fillStyle = '#000'; x.strokeStyle = '#000';
+  x.lineWidth = S * 0.08;
+  x.fillText(ch, o.x, o.y); x.strokeText(ch, o.x, o.y);
+  var near = alphaOf(x);
+  x.clearRect(0,0,S,S);
+  x.fillText(ch, o.x, o.y);
+  var fillM = alphaOf(x);
+  x.globalCompositeOperation = 'destination-out';
+  x.lineWidth = S * 0.03;
+  x.strokeText(ch, o.x, o.y);
+  var core = alphaOf(x);
+  if (core.n < 12) core = fillM;
+  masks = {near: near, core: core};
+}
+function evaluate(){
+  if (!strokes.length || mode === 'PAINT') return;
+  composeInk();
+  if (!masks) buildMasks();
+  var t = document.createElement('canvas'); t.width = t.height = N;
+  var tx = t.getContext('2d');
+  tx.drawImage(inkC, 0, 0, N, N);
+  var d = tx.getImageData(0,0,N,N).data;
+  var coreHit = 0;
+  for (var i = 0; i < N*N; i++) {
+    if (d[i*4+3] > 90 && masks.core.a[i]) coreHit++;
+  }
+  var coverage = coreHit / Math.max(1, masks.core.n);
+  if (coverage >= 0.5) {
+    var firstTime = !passed;
+    passed = true;
+    markDone(mode, K(cur()));
+    setStatus(T('good'), true);
+    updateUI();
+    if (firstTime) setTimeout(speak, 250);
+  } else if (!passed) {
+    setStatus(T('more'), false);
+  }
+}
+
+/* ---- sound: parent's MP3 > files packed in the app > phone's Arabic text-to-speech ---- */
+var arVoice = null;
+function pickVoices(){
+  if (!('speechSynthesis' in window)) return;
+  var v = window.speechSynthesis.getVoices() || [];
+  arVoice = v.filter(function(x){ return /^ar/i.test(x.lang); })[0] || null;
+}
+if ('speechSynthesis' in window) {
+  pickVoices();
+  window.speechSynthesis.onvoiceschanged = pickVoices;
+}
+var unlocked = false;
+function unlockSpeech(){
+  if (unlocked || !('speechSynthesis' in window)) return;
+  unlocked = true;
+  try { var u = new SpeechSynthesisUtterance(' '); u.volume = 0; window.speechSynthesis.speak(u); } catch(e) {}
+}
+
+/* MP3 files added by the parent, kept on this device */
+var clips = {}, dbp = null, players = [null, null, null];
+function idb(){
+  if (dbp) return dbp;
+  dbp = new Promise(function(res, rej){
+    try {
+      var r = indexedDB.open('qd-audio', 1);
+      r.onupgradeneeded = function(){ r.result.createObjectStore('clips'); };
+      r.onsuccess = function(){ res(r.result); };
+      r.onerror = function(){ rej(r.error); };
+    } catch(e) { rej(e); }
+  });
+  return dbp;
+}
+function idbPut(k, blob){
+  return idb().then(function(db){ return new Promise(function(res, rej){
+    var tx = db.transaction('clips', 'readwrite'); tx.objectStore('clips').put(blob, k);
+    tx.oncomplete = res; tx.onerror = function(){ rej(tx.error); };
+  }); });
+}
+function idbAll(){
+  return idb().then(function(db){ return new Promise(function(res, rej){
+    var out = {}, c = db.transaction('clips', 'readonly').objectStore('clips').openCursor();
+    c.onsuccess = function(){ var cu = c.result; if (cu) { out[cu.key] = cu.value; cu.continue(); } else res(out); };
+    c.onerror = function(){ rej(c.error); };
+  }); });
+}
+function idbClear(){
+  return idb().then(function(db){ return new Promise(function(res, rej){
+    var tx = db.transaction('clips', 'readwrite'); tx.objectStore('clips').clear();
+    tx.oncomplete = res; tx.onerror = function(){ rej(tx.error); };
+  }); });
+}
+function clipInfo(added){
+  var c = Object.keys(clips).length;
+  $('clipinfo').textContent = c ? (added ? T('nclips2', c, added) : T('nclips', c)) : T('noclips');
+}
+idbAll().then(function(o){ clips = o; clipInfo(0); }).catch(function(){});
+function playClip(key){
+  var b = clips[key]; if (!b) return false;
+  try {
+    if (players[0]) { players[0].pause(); }
+    var url = URL.createObjectURL(b), au = new Audio(url);
+    au.onended = function(){ URL.revokeObjectURL(url); };
+    var pr = au.play(); if (pr && pr.catch) pr.catch(function(){});
+    players[0] = au; return true;
+  } catch(e) { return false; }
+}
+/* voice files packed inside the phone app (assets/audio/L01.mp3 ...) */
+var bundledOk = {};
+function playBundled(key, fail){
+  if (bundledOk[key] === false) { fail(); return; }
+  if (players[2]) { players[2]._skip = true; try { players[2].pause(); } catch(e) {} }
+  var au, finished = false;
+  function bad(){ if (finished || (au && au._skip)) return; finished = true; bundledOk[key] = false; fail(); }
+  try {
+    au = new Audio('audio/' + key + '.mp3');
+    au._skip = false;
+    au.onerror = bad;
+    au.onplaying = function(){ finished = true; bundledOk[key] = true; };
+    players[2] = au;
+    var pr = au.play(); if (pr && pr.catch) pr.catch(bad);
+  } catch(e) { bad(); }
+}
+window.__noVoice = function(){ setStatus(T('noarvoice'), false); };
+function webSay(text){
+  if (!('speechSynthesis' in window)) { setStatus(T('novoice'), false); return; }
+  if (!arVoice) pickVoices();
+  try { window.speechSynthesis.resume(); } catch(e) {}
+  setTimeout(function(){
+    try {
+      var u = new SpeechSynthesisUtterance(text);
+      if (arVoice) { u.voice = arVoice; u.lang = arVoice.lang; } else { u.lang = 'ar-SA'; }
+      u.rate = 0.7; u.pitch = 1.05;
+      u.onerror = function(ev){ if (ev && ev.error !== 'canceled' && ev.error !== 'interrupted') setStatus(T('nosound'), false); };
+      window.speechSynthesis.speak(u);
+    } catch(e) { setStatus(T('nosound'), false); }
+  }, 90);
+}
+function nativeSay(text){
+  try { window.AndroidTTS.speak(text, 'ar-SA'); } catch(e) { setStatus(T('nosound'), false); }
+}
+function sayAr(text, fileKey, upKey){
+  try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch(e) {}
+  if (playClip(upKey)) return;
+  if (window.AndroidTTS) { playBundled(fileKey, function(){ nativeSay(text); }); return; }
+  webSay(text);
+}
+function speak(){
+  var it = cur();
+  sayAr(it.tts, it.file, it.file);
+}
+
+/* ---- interface language ---- */
+var lang = 'ur';
+function langInfo(){
+  for (var i = 0; i < I18N.langs.length; i++) { if (I18N.langs[i].c === lang) return I18N.langs[i]; }
+  return I18N.langs[0];
+}
+function T(key){
+  var pk = I18N.ui[lang] || I18N.ui.ur, v = pk[key];
+  if (v == null) v = I18N.ui.ur[key];
+  if (v == null) return key;
+  for (var i = 1; i < arguments.length; i++) v = v.replace('{' + (i - 1) + '}', arguments[i]);
+  return v;
+}
+/* the name shown beside the speaker, in the chosen language */
+function pick(it){
+  if (lang === 'en') return it.en;
+  if (lang === 'hi') return it.hi;
+  if (lang === 'ur' && it.ur) return it.ur;
+  return it.ar || it.ch;
+}
+function letterName(l){ return lang === 'en' ? l[3] : lang === 'hi' ? l[4] : lang === 'ur' ? l[2] : l[1]; }
+function dispName(it){
+  if (mode === 'SYL') return (lang === 'en' || lang === 'hi') ? pick(it) : it.ar;
+  if (mode === 'PAINT') {
+    var meaning = lang === 'en' ? it.en : lang === 'hi' ? it.hi : lang === 'ur' ? it.ur : '';
+    return it.word + (meaning ? ' \u00B7 ' + meaning : '');
+  }
+  return pick(it);
+}
+function formulaNames(it){
+  var b = letterByCh(it.base);
+  return letterName(b) + ' + ' + letterName(ALIF) + ' = ' + ((lang === 'en' || lang === 'hi') ? pick(it) : it.ar);
+}
+function applyLang(){
+  var li = langInfo(), rtl = li.d === 'rtl';
+  ['main.app', '.dock'].forEach(function(sel){
+    var el = document.querySelector(sel);
+    if (el) { el.setAttribute('lang', lang); el.setAttribute('dir', li.d); }
+  });
+  document.title = T('title');
+  document.querySelectorAll('[data-i]').forEach(function(el){ el.textContent = T(el.getAttribute('data-i')); });
+  document.querySelectorAll('.sw .ur').forEach(function(el){
+    el.textContent = (lang === 'ar') ? '' : cname(parseInt(el.getAttribute('data-c'), 10));
+  });
+  var pu = document.querySelector('#prev use'), nu = document.querySelector('#next use');
+  if (pu) pu.setAttribute('href', rtl ? '#i-right' : '#i-left');
+  if (nu) nu.setAttribute('href', rtl ? '#i-left' : '#i-right');
+  $('lang').value = lang;
+  clipInfo(0);
+  $('vinfo').textContent = '';
+  var pm = mode === 'PAINT';
+  setStatus(passed ? T(pm ? 'picdone2' : 'good') : T(pm ? 'pickcolour' : 'sub'), passed);
+  updateUI(); updateGuide();
+}
+function initLang(){
+  var sel = $('lang');
+  I18N.langs.forEach(function(l){
+    var o = document.createElement('option'); o.value = l.c; o.textContent = l.n; sel.appendChild(o);
+  });
+  try { var sv = localStorage.getItem('qd-lang'); if (sv && I18N.ui[sv]) lang = sv; } catch(e) {}
+  sel.addEventListener('change', function(){
+    lang = sel.value;
+    try { localStorage.setItem('qd-lang', lang); } catch(e) {}
+    applyLang();
+  });
+  applyLang();
+}
+
+/* ---- UI ---- */
+var statusEl = $('status');
+function setStatus(t, ok){ statusEl.textContent = t; statusEl.className = 'status' + (ok ? ' ok' : ''); }
+
+function buildStrip(){
+  var s = $('strip'); s.innerHTML = '';
+  items().forEach(function(it, i){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = it.chip || it.ch; b.dataset.i = i;
+    b.setAttribute('lang', 'ar');
+    b.setAttribute('aria-label', it.word || it.ch);
+    b.addEventListener('click', function(){ go(i); });
+    s.appendChild(b);
+  });
+}
+function updateUI(){
+  var list = items(), it = cur();
+  $('urname').textContent = dispName(it);
+  var n = (done[mode] || []).length;
+  $('count').textContent = (idx + 1) + ' / ' + list.length + '   \u2605 ' + n;
+  $('star').hidden = !isDone(mode, K(it));
+  $('prev').disabled = idx === 0;
+  $('next').disabled = idx === list.length - 1;
+  $('next').classList.toggle('ready', passed && idx < list.length - 1);
+  var chips = $('strip').children;
+  for (var i = 0; i < chips.length; i++) {
+    var d = isDone(mode, K(list[i])), on = i === idx;
+    chips[i].className = 'chip' + (d ? ' done' : '') + (on ? ' on' : '');
+    var old = chips[i].querySelector('.mini');
+    if (d && !old) {
+      var sv = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      sv.setAttribute('class', 'i fill mini');
+      var u = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      u.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#i-star'); u.setAttribute('href', '#i-star');
+      sv.appendChild(u); chips[i].appendChild(sv);
+    }
+  }
+  var act = chips[idx];
+  if (act && act.scrollIntoView) { try { act.scrollIntoView({inline:'center', block:'nearest'}); } catch(e) {} }
+}
+function loadItem(){
+  strokes = []; passed = false; masks = null;
+  try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch(e) {}
+  var pm = mode === 'PAINT';
+  guide.hidden = pm; inkC.hidden = pm;
+  if (pm) picEl.removeAttribute('hidden'); else picEl.setAttribute('hidden', '');
+  $('wcrayons').hidden = pm; $('swatches').hidden = !pm;
+  if (pm) {
+    renderPic(); passed = allFilled();
+    setStatus(passed ? T('picdone') : T('pickcolour'), passed);
+  } else {
+    drawGuide(); redrawInk();
+    setStatus(T('sub'), false);
+  }
+  updateUI(); updateGuide();
+}
+function go(i){
+  var list = items();
+  if (i < 0 || i >= list.length) return;
+  idx = i; loadItem();
+}
+var KINDS = {'ABC': 'L', 'SYL': 'S', '123': 'N', 'PAINT': 'C'};
+var MODES = {'L': 'ABC', 'S': 'SYL', 'N': '123', 'C': 'PAINT'};
+function setMode(m){
+  mode = m; idx = 0;
+  document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-selected', t.dataset.kind === KINDS[m] ? 'true' : 'false'); });
+  buildStrip(); loadItem();
+}
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click', function(){
+    var target = MODES[t.dataset.kind];
+    if (mode !== target) setMode(target);
+  });
+});
+$('prev').addEventListener('click', function(){ go(idx - 1); });
+$('next').addEventListener('click', function(){ go(idx + 1); });
+$('speak').addEventListener('click', function(){ unlockSpeech(); speak(); });
+$('clear').addEventListener('click', function(){
+  if (mode === 'PAINT') {
+    paint[K(cur())] = []; savePaint(); renderPic(); passed = false;
+    setStatus(T('pickcolour'), false); updateUI(); return;
+  }
+  strokes = []; passed = false;
+  redrawInk(); setStatus(T('again'), false); updateUI();
+});
+document.querySelectorAll('.crayon').forEach(function(b){
+  b.addEventListener('click', function(){
+    color = parseInt(b.dataset.c, 10);
+    document.querySelectorAll('.crayon').forEach(function(x){ x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
+  });
+});
+
+/* ---- painting ---- */
+var COLORS = [
+  {en:'Red', ar:'أحمر'}, {en:'Orange', ar:'برتقالي'}, {en:'Yellow', ar:'أصفر'}, {en:'Green', ar:'أخضر'},
+  {en:'Blue', ar:'أزرق'}, {en:'Purple', ar:'بنفسجي'}, {en:'Pink', ar:'وردي'}, {en:'Brown', ar:'بني'}
+];
+var paint = {};
+try { paint = JSON.parse(localStorage.getItem('qd-paint') || '{}') || {}; } catch(e) { paint = {}; }
+function savePaint(){ try { localStorage.setItem('qd-paint', JSON.stringify(paint)); } catch(e) {} }
+var swatch = -2;
+function cname(i){ return (I18N.colors[lang] || I18N.colors.ur)[i]; }
+function colName(i){ return lang === 'ar' ? COLORS[i].ar : COLORS[i].ar + ' \u00B7 ' + cname(i); }
+document.querySelectorAll('.sw .arn').forEach(function(el, i){ el.textContent = COLORS[i].ar; });
+function speakColor(i){
+  var c = COLORS[i], key = c.en.toUpperCase();
+  sayAr(c.ar, 'C_' + key, key);
+}
+function regions(){ return picEl.querySelectorAll('.f'); }
+function allFilled(){
+  var arr = paint[K(cur())] || [], n = regions().length;
+  for (var i = 0; i < n; i++) { if (!arr[i]) return false; }
+  return n > 0;
+}
+function nextIdx(){
+  var arr = paint[K(cur())] || [], n = regions().length;
+  for (var i = 0; i < n; i++) { if (!arr[i]) return i; }
+  return -1;
+}
+/* the banner above the board: colour to use (paint tab) or "ب + ا = با" (joining tab) */
+function updateGuide(){
+  var ask = $('ask');
+  Array.prototype.forEach.call(regions(), function(el){ el.classList.remove('next'); });
+  if (mode === 'SYL') {
+    var it = cur();
+    ask.hidden = false; $('askdot').hidden = true;
+    $('askEn').textContent = it.base + ' + ' + 'ا' + ' = ' + it.ar;
+    $('askEn').className = 'askEn formula';
+    $('askUr').textContent = formulaNames(it);
+    return;
+  }
+  $('askdot').hidden = false; $('askEn').className = 'askEn';
+  if (mode !== 'PAINT') { ask.hidden = true; return; }
+  var ni = nextIdx();
+  if (ni < 0) { ask.hidden = true; return; }
+  var ci = cur().cols[ni], c = COLORS[ci];
+  ask.hidden = false;
+  $('askdot').style.background = 'var(--p' + ci + ')';
+  $('askEn').textContent = c.ar;
+  $('askUr').textContent = T('fillline', cname(ci));
+  regions()[ni].classList.add('next');
+}
+function renderPic(){
+  var it = cur();
+  picEl.innerHTML = it.svg + '<text class="cap" x="100" y="192">' + it.word + '</text>';
+  var arr = paint[K(it)] || [];
+  Array.prototype.forEach.call(regions(), function(el, i){
+    el.setAttribute('data-i', i);
+    if (arr[i]) el.style.fill = arr[i];
+  });
+  updateGuide();
+}
+picEl.addEventListener('click', function(e){
+  if (mode !== 'PAINT') return;
+  var el = e.target.closest ? e.target.closest('.f') : null;
+  if (!el || !picEl.contains(el)) return;
+  unlockSpeech();
+  var it = cur(), i = parseInt(el.getAttribute('data-i'), 10);
+  var arr = paint[K(it)] || (paint[K(it)] = []);
+  var was = allFilled(), need = it.cols[i], filled = false;
+  if (swatch === -1) {
+    arr[i] = null; el.style.fill = '';
+  } else if (swatch < 0) {
+    setStatus(T('choosefirst', colName(need)), false);
+    speakColor(need); return;
+  } else if (swatch !== need) {
+    setStatus(T('wrongcol', COLORS[swatch].ar, colName(need)), false);
+    speakColor(need); return;
+  } else {
+    var col = cssVar('--p' + swatch); arr[i] = col; el.style.fill = col; filled = true;
+  }
+  savePaint(); updateGuide();
+  if (!was && allFilled()) {
+    passed = true; markDone('PAINT', K(it));
+    setStatus(T('picdone2'), true);
+    updateUI(); setTimeout(speak, 250);
+  } else if (was && !allFilled()) {
+    passed = false; setStatus(T('pickcolour'), false); updateUI();
+  } else if (filled) {
+    setStatus(T('rightcol', colName(swatch)), true); speakColor(swatch);
+  }
+});
+$('ask').addEventListener('click', function(){
+  unlockSpeech();
+  if (mode === 'SYL') { speak(); return; }
+  var ni = nextIdx(); if (ni >= 0) speakColor(cur().cols[ni]);
+});
+document.querySelectorAll('.sw').forEach(function(b){
+  b.addEventListener('click', function(){
+    swatch = parseInt(b.dataset.p, 10);
+    document.querySelectorAll('.sw').forEach(function(x){ x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
+    unlockSpeech();
+    if (swatch >= 0) { setStatus(colName(swatch), false); speakColor(swatch); }
+    else { setStatus(T('erasehint'), false); }
+  });
+});
+
+/* ---- voice check ---- */
+if (!window.AndroidTTS || !window.AndroidTTS.installVoice) $('vinstall').hidden = true;
+$('vinstall').addEventListener('click', function(){ try { window.AndroidTTS.installVoice(); } catch(e) {} });
+$('vtest').addEventListener('click', function(){
+  var info = '', ready = false, text = 'مرحبا، هل تسمعني؟';
+  unlockSpeech();
+  try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch(e) {}
+  if (window.AndroidTTS) {
+    try { ready = !!window.AndroidTTS.available(); } catch(e) {}
+    var hasAr = true;
+    try { if (window.AndroidTTS.hasLang) hasAr = !!window.AndroidTTS.hasLang('ar-SA'); } catch(e) {}
+    info = !ready ? T('v_phonenot') : (hasAr ? T('v_phoneready') : T('noarvoice'));
+    $('vinfo').textContent = info;
+    if (hasAr) nativeSay(text);
+    return;
+  }
+  if ('speechSynthesis' in window) {
+    pickVoices();
+    var n = (window.speechSynthesis.getVoices() || []).length;
+    info = arVoice ? T('v_found', n, arVoice.name) : T('v_nofound', n);
+  } else {
+    info = T('v_nosupport');
+  }
+  $('vinfo').textContent = info;
+  if ('speechSynthesis' in window) webSay(text);
+});
+
+/* ---- MP3 files ---- */
+function validKey(stem){
+  return /^L(0[1-9]|1[0-9]|2[0-8])$/.test(stem) || /^S(0[1-9]|1[0-9]|2[0-7])$/.test(stem) ||
+         /^W(0[1-9]|1[0-9]|2[0-6])$/.test(stem) || /^N([1-9]|[1-9][0-9]|100)$/.test(stem) ||
+         /^(RED|ORANGE|YELLOW|GREEN|BLUE|PURPLE|PINK|BROWN)$/.test(stem);
+}
+$('mp3').addEventListener('change', function(e){
+  var files = Array.prototype.slice.call(e.target.files || []), n = 0, jobs = [];
+  files.forEach(function(f){
+    var stem = f.name.replace(/\.[^.]+$/, '').trim().toUpperCase();
+    if (!validKey(stem)) return;
+    clips[stem] = f; n++;
+    jobs.push(idbPut(stem, f).catch(function(){}));
+  });
+  Promise.all(jobs).then(function(){ clipInfo(n); });
+  e.target.value = '';
+});
+$('mp3clear').addEventListener('click', function(){
+  clips = {}; clipInfo(0);
+  idbClear().catch(function(){});
+});
+
+/* ---- theme + resize ---- */
+function repaint(){ lay = {}; drawGuide(); redrawInk(); }
+try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', repaint); } catch(e) {}
+try { new MutationObserver(repaint).observe(root, {attributes:true, attributeFilter:['data-theme']}); } catch(e) {}
+if (window.ResizeObserver) { new ResizeObserver(function(){ setSize(); }).observe(pad); }
+else { window.addEventListener('resize', setSize); }
+
+/* ---- start ---- */
+buildStrip();
+setSize();
+updateUI();
+initLang();
+var fontReady = (document.fonts && document.fonts.load) ? document.fonts.load('700 100px "Noto Naskh Arabic"', 'بتث').catch(function(){}) : Promise.resolve();
+Promise.race([fontReady, new Promise(function(r){ setTimeout(r, 2500); })]).then(function(){
+  lay = {}; masks = null; drawGuide(); redrawInk();
+});
+})();
+</script>
+</body>
+</html>
